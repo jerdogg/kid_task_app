@@ -1,0 +1,23 @@
+#!/bin/bash
+rake db:drop
+rails destroy model program
+rails destroy model task
+rails destroy model programItem
+
+rails db:create
+
+rails g model program title description:text
+rails g model task title description:text 
+rails g model programItem program_id:integer task_id:integer position:integer program:references task:references
+
+
+# echo "on the following migration
+# read -n1 -r -p "Do the above line, and Press space to continue..." key
+
+
+echo "class Program < ApplicationRecord\n  has_many :taskList\nend"
+echo "class TaskList < ApplicationRecord\n  belongs_to :program\n  has_one :task validates :task_id, :presence => true\nend"
+echo "class Task < ApplicationRecord\n  belongs_to :taskList, optional: true\nend"
+
+
+rails db:migrate
