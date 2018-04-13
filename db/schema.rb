@@ -10,10 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180413194753) do
+ActiveRecord::Schema.define(version: 20180413225801) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "enrollments", force: :cascade do |t|
+    t.integer "state"
+    t.bigint "program_id"
+    t.bigint "task_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["program_id"], name: "index_enrollments_on_program_id"
+    t.index ["task_id"], name: "index_enrollments_on_task_id"
+    t.index ["user_id"], name: "index_enrollments_on_user_id"
+  end
 
   create_table "program_items", force: :cascade do |t|
     t.bigint "program_id"
@@ -69,6 +81,9 @@ ActiveRecord::Schema.define(version: 20180413194753) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+  add_foreign_key "enrollments", "programs"
+  add_foreign_key "enrollments", "tasks"
+  add_foreign_key "enrollments", "users"
   add_foreign_key "program_items", "programs"
   add_foreign_key "program_items", "tasks"
 end

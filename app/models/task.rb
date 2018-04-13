@@ -1,3 +1,4 @@
 class Task < ApplicationRecord
-  belongs_to  :program_items, optional: true
+  has_many :program_items
+  has_many :enrollments
 end
