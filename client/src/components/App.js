@@ -18,7 +18,7 @@ class App extends Component {
         <Flash />
         <FetchUser>
           <Switch>
-            <Route exact path='/' component={Home} />
+            <ProtectedRoute exact path='/' component={Home} />
             <AuthRoute exact path='/login' component={Login} />
             <AuthRoute exact path='/register' component={Register} />
             <Route component={NoMatch} />
@@ -30,3 +30,7 @@ class App extends Component {
 }
 
 export default App;
+
+// ProtectedRoute means its a logged in user
+// AuthRoute is used so that a logged in user can't get back to the 
+// login or register page

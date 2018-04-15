@@ -1,5 +1,6 @@
 import { createStore, compose, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
+// is this part of the setHeaders stuff?
 import apiMiddleware from 'redux-devise-axios';
 import rootReducer from './reducers/index';
 import axios from 'axios';
